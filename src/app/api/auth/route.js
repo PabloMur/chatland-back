@@ -7,9 +7,9 @@ export async function POST(request) {
   const { email, password } = data;
   const hashedPassword = await bcrypt.hash(password, 10);
   const docRef = firestoreDB.collection("auth").doc();
-  await docRef.set({
+  const authDoc = await docRef.set({
     email,
     password: hashedPassword,
   });
-  return NextResponse.json({ authCreated: true });
+  return NextResponse.json({ authCreated: true, authDoc });
 }
