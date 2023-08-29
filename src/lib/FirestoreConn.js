@@ -1,4 +1,4 @@
-import * as admin from "firebase-admin";
+const admin = require("firebase-admin");
 
 const secretKey = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 const databaseURLSecretKey = process.env.DATABASEURL_SRECRETKEY;
@@ -13,4 +13,4 @@ const firebaseApp = admin.apps.length
 const firestoreDB = admin.firestore();
 const realtimeDB = admin.database();
 
-export { firestoreDB, realtimeDB };
+module.exports = { firestoreDB, realtimeDB };
