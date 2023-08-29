@@ -1,10 +1,9 @@
 import { UserModel } from "../models/UserModel";
 import jwt from "jsonwebtoken";
-import { NextRequest } from "next/server";
 import { headers } from "next/headers";
 
 class UserController {
-  static async createUser(request: NextRequest) {
+  static async createUser(request) {
     try {
       const { email, password } = await request.json();
       const emailCheck = await UserModel.createMe(email, password);
@@ -13,15 +12,15 @@ class UserController {
       console.error(error);
     }
   }
-  static async getUserData(req: NextRequest) {
+  static async getUserData(req) {
     try {
       const authorization = headers().get("authorization");
       const { email } = await req.json();
       if (!authorization) return { error: "Missing authorization token" };
 
       const token = authorization.replace("Bearer ", "");
-      const secret = process.env.SECRET_KEY as string;
-      const decodedToken = jwt.verify(token, secret) as { email: string };
+      const secret = process.env.SECRET_KEY;
+      const decodedToken = jwt.verify(token, secret);
 
       if (decodedToken.email !== email) {
         return { error: "Invalid email in token" };
@@ -34,7 +33,7 @@ class UserController {
       return { error: "An error occurred" };
     }
   }
-  static async updateUserData(request: NextRequest) {
+  static async updateUserData(request) {
     try {
       const headersList = headers();
       const authorizationRef = headersList.get("authorization");
@@ -43,8 +42,8 @@ class UserController {
       if (!authorizationRef) return { error: "Missing authorization token" };
 
       const token = authorizationRef.replace("Bearer ", "");
-      const secret = process.env.SECRET_KEY as string;
-      const decodedToken = jwt.verify(token, secret) as any;
+      const secret = process.env.SECRET_KEY;
+      const decodedToken = jwt.verify(token, secret);
 
       if (decodedToken.email !== email) {
         return { error: "Invalid email in token" };
@@ -56,15 +55,15 @@ class UserController {
       return { error: "An error occurred" };
     }
   }
-  static async deleteAccount(req: NextRequest) {
+  static async deleteAccount(req) {
     try {
       const headersList = headers();
       const authorizationRef = headersList.get("authorization");
       if (!authorizationRef) return { error: "Missing authorization token" };
 
       const token = authorizationRef.replace("Bearer ", "");
-      const secret = process.env.SECRET_KEY as string;
-      const decodedToken = jwt.verify(token, secret) as any;
+      const secret = process.env.SECRET_KEY;
+      const decodedToken = jwt.verify(token, secret);
 
       if (!decodedToken.email) return { error: "Invalid email in token" };
 
@@ -74,7 +73,7 @@ class UserController {
       return { error: "An error occurred" };
     }
   }
-  static async checkEmail(email: string) {
+  static async checkEmail(email) {
     try {
       const emailCheck = await UserModel.checkEmail(email);
       return emailCheck;

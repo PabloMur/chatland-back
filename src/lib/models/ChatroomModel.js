@@ -5,11 +5,11 @@ import { nanoid } from "nanoid";
 import { generarNumeroAleatorio } from "../tools";
 
 class CreateChatroomModel {
-  static async createChatroom(token: string) {
+  static async createChatroom(token) {
     try {
       // Verificar y decodificar el token
-      const secret = process.env.SECRET_KEY as any;
-      const decodedToken = jwt.verify(token, secret) as { email: string };
+      const secret = process.env.SECRET_KEY;
+      const decodedToken = jwt.verify(token, secret);
 
       // Crear la chatroom en Firebase Realtime Database
       const id = nanoid();

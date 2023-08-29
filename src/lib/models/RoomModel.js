@@ -1,6 +1,6 @@
 import { firestoreDB } from "@/lib/FirestoreConn";
 class roomModel {
-  static async deleteRoom(roomId: string) {
+  static async deleteRoom(roomId) {
     try {
       const docRef = await firestoreDB.collection("rooms").doc(roomId).delete();
       return docRef;

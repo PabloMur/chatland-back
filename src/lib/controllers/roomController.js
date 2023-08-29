@@ -2,11 +2,10 @@ import { headers } from "next/headers";
 import CreateChatroomModel from "../models/ChatroomModel";
 import ChatroomModel from "../models/RoomModel";
 import jwt from "jsonwebtoken";
-import { NextRequest, NextResponse } from "next/server";
-import { StructuredType } from "typescript";
+import { NextResponse } from "next/server";
 
 class roomController {
-  static async createChatroom(request: Request) {
+  static async createChatroom(request) {
     const headersList = headers();
     const authorizationRef = headersList.get("authorization");
     if (!authorizationRef) {
@@ -25,7 +24,7 @@ class roomController {
     }
   }
 
-  static async deleteRoom(request: NextRequest, roomId: string) {
+  static async deleteRoom(request, roomId) {
     const headersList = headers();
     const authorizationRef = headersList.get("authorization");
     if (!authorizationRef) {
@@ -35,7 +34,7 @@ class roomController {
     if (!token) {
       return { error: "Missing authorization token" };
     }
-    const secret = process.env.SECRET_KEY as any;
+    const secret = process.env.SECRET_KEY;
     if (!token) {
       return NextResponse.json(
         { error: "Missing authorization token" },

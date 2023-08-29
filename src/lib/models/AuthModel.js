@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 class AuthModel {
-  static async createAuth(email: string, password: string) {
+  static async createAuth(email, password) {
     const hashedPassword = await bcrypt.hash(password, 10);
     const docRef = firestoreDB.collection("auth").doc();
     await docRef.set({
@@ -12,7 +12,7 @@ class AuthModel {
     });
     return true;
   }
-  static async deleteAuth(email: string) {
+  static async deleteAuth(email) {
     try {
       const querySnapshot = await firestoreDB
         .collection("auth")
@@ -31,10 +31,10 @@ class AuthModel {
       return false;
     }
   }
-  static async creatToken(email: string, password: string) {
+  static async creatToken(email, password) {
     //Se recibe un email y password y se retona un token firmado
     try {
-      const secret = process.env.SECRET_KEY as any;
+      const secret = process.env.SECRET_KEY;
       // Buscar el documento en la colección "auth" con el correo electrónico dado
       const querySnapshot = await firestoreDB
         .collection("auth")

@@ -1,10 +1,9 @@
 import AuthModel from "@/lib/models/AuthModel";
 import { headers } from "next/headers";
 import jwt from "jsonwebtoken";
-import { NextRequest } from "next/server";
 
 class AuthController {
-  static async createAuth(req: NextRequest) {
+  static async createAuth(req) {
     try {
       const { email, password } = await req.json();
       const created = await AuthModel.createAuth(email, password);
@@ -13,7 +12,7 @@ class AuthController {
       console.error(error);
     }
   }
-  static async deleteAuth(req: NextRequest) {
+  static async deleteAuth(req) {
     try {
       const headersList = headers();
       const authorizationRef = headersList.get("authorization");
@@ -22,8 +21,8 @@ class AuthController {
       }
 
       const token = authorizationRef.replace("Bearer ", "");
-      const secret = process.env.SECRET_KEY as string;
-      const decodedToken = jwt.verify(token, secret) as any;
+      const secret = process.env.SECRET_KEY;
+      const decodedToken = jwt.verify(token, secret);
 
       if (!decodedToken.email) {
         return { error: "Invalid email in token" };
@@ -35,7 +34,7 @@ class AuthController {
       return { error: "An error occurred" };
     }
   }
-  static async retriveToken(req: NextRequest) {
+  static async retriveToken(req) {
     try {
       const { email, password } = await req.json();
       const tokenCreated = await AuthModel.creatToken(email, password);

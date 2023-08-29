@@ -2,14 +2,8 @@ import { firestoreDB } from "@/lib/FirestoreConn";
 import { cloudinary } from "@/lib/CloudinaryConn";
 import bcrypt from "bcrypt";
 class UserModel {
-  static async createMe(email: string, password: string) {
+  static async createMe(email, password) {
     try {
-      type User = {
-        name: string;
-        email: string;
-        userImage: string;
-      };
-
       // Verificar si el usuario ya existe en la colección "users"
       const snapshot = await firestoreDB
         .collection("users")
@@ -19,7 +13,7 @@ class UserModel {
       if (!snapshot.empty) return { error: "El usuario ya existe" };
 
       // Crear un nuevo documento de usuario
-      const newUser: User = {
+      const newUser = {
         name: "User",
         email,
         userImage:
@@ -48,7 +42,7 @@ class UserModel {
       console.error(error);
     }
   }
-  static async getMe(email: string) {
+  static async getMe(email) {
     try {
       const querySnapshot = await firestoreDB
         .collection("users")
@@ -66,7 +60,7 @@ class UserModel {
       return null;
     }
   }
-  static async updateMe(email: string, data: any) {
+  static async updateMe(email, data) {
     try {
       const querySnapshot = await firestoreDB
         .collection("users")
@@ -94,7 +88,7 @@ class UserModel {
       return null;
     }
   }
-  static async deleteMe(email: string) {
+  static async deleteMe(email) {
     try {
       const querySnapshot = await firestoreDB
         .collection("users")
@@ -114,7 +108,7 @@ class UserModel {
     }
   }
 
-  static async checkEmail(email: string) {
+  static async checkEmail(email) {
     try {
       const querySnapshot = await firestoreDB
         .collection("users")

@@ -1,7 +1,7 @@
-let callURL: string;
+let callURL;
 callURL = "/api/";
 
-export const APICheckEmail = async (email: any) => {
+export const APICheckEmail = async (email) => {
   try {
     console.log("ApiCall");
     const fetching = await fetch("/api/user/check/" + email);
@@ -13,7 +13,7 @@ export const APICheckEmail = async (email: any) => {
   }
 };
 
-export const APICreateUser = async (email: string, password: string) => {
+export const APICreateUser = async (email, password) => {
   try {
     const fetching = await fetch(callURL + "user", {
       method: "POST",
@@ -35,7 +35,7 @@ export const APICreateUser = async (email: string, password: string) => {
   }
 };
 
-export const APIGetToken = async (email: string, password: string) => {
+export const APIGetToken = async (email, password) => {
   try {
     const fetching = await fetch(callURL + "auth/token", {
       method: "POST",
@@ -54,7 +54,7 @@ export const APIGetToken = async (email: string, password: string) => {
   }
 };
 
-export const APICreateChatroom = async (email: string, token: string) => {
+export const APICreateChatroom = async (email, token) => {
   try {
     const fetching = await fetch(callURL + "createRoom", {
       method: "POST",
@@ -72,7 +72,7 @@ export const APICreateChatroom = async (email: string, token: string) => {
   }
 };
 
-export const APIGetRoomRealtimeID = async (roomId: string) => {
+export const APIGetRoomRealtimeID = async (roomId) => {
   try {
     const fetching = await fetch(callURL + "getRoomId", {
       method: "POST",
@@ -90,7 +90,7 @@ export const APIGetRoomRealtimeID = async (roomId: string) => {
   }
 };
 
-export const APIGetRoomsIDs = async (email: string) => {
+export const APIGetRoomsIDs = async (email) => {
   try {
     const fetching = await fetch(callURL + "myRooms", {
       method: "POST",
@@ -107,7 +107,7 @@ export const APIGetRoomsIDs = async (email: string) => {
   }
 };
 
-export const APIGetGuestRoomsIDs = async (email: string) => {
+export const APIGetGuestRoomsIDs = async (email) => {
   try {
     const fetching = await fetch(callURL + "myGuestRooms", {
       method: "POST",
@@ -124,11 +124,7 @@ export const APIGetGuestRoomsIDs = async (email: string) => {
   }
 };
 
-export const APISetImGuest = async (
-  email: string,
-  chatroomID: string,
-  roomId: string
-) => {
+export const APISetImGuest = async (email, chatroomID, roomId) => {
   try {
     const fetching = await fetch(callURL + "guestRoom", {
       method: "POST",
@@ -149,7 +145,7 @@ export const APISetImGuest = async (
   }
 };
 
-export const APISendMessage = async (message: any, token: string) => {
+export const APISendMessage = async (message, token) => {
   try {
     const fetching = await fetch(callURL + "message", {
       method: "PUT",
@@ -168,7 +164,7 @@ export const APISendMessage = async (message: any, token: string) => {
   return message;
 };
 
-export const APIGetUserMe = async (email: string, token: string) => {
+export const APIGetUserMe = async (email, token) => {
   try {
     const fetching = await fetch(callURL + "me", {
       method: "POST",
@@ -186,7 +182,7 @@ export const APIGetUserMe = async (email: string, token: string) => {
   }
 };
 
-export const APIDeleteChatroom = async (roomID: string, token: string) => {
+export const APIDeleteChatroom = async (roomID, token) => {
   try {
     const fetching = await fetch(callURL + "deleteRoom?roomId=" + roomID, {
       method: "DELETE",
@@ -203,7 +199,7 @@ export const APIDeleteChatroom = async (roomID: string, token: string) => {
   }
 };
 
-export const APIDeleteAccount = async (token: string) => {
+export const APIDeleteAccount = async (token) => {
   try {
     const fetching = await fetch(callURL + "deleteAccount", {
       method: "DELETE",
@@ -220,11 +216,7 @@ export const APIDeleteAccount = async (token: string) => {
   }
 };
 
-export const APIUpdateUserData = async (
-  token: string,
-  email: string,
-  newData: any
-) => {
+export const APIUpdateUserData = async (token, email, newData) => {
   try {
     const fetching = await fetch(callURL + "meUpdate", {
       method: "PUT",
