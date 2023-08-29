@@ -1,12 +1,12 @@
 import * as admin from "firebase-admin";
 
-const secretKey = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT as any);
-const databaseURLSecretKey = process.env.DATABASEURL_SRECRETKEY as any;
+const secretKey = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+const databaseURLSecretKey = process.env.DATABASEURL_SRECRETKEY;
 
 const firebaseApp = admin.apps.length
   ? admin.app()
   : admin.initializeApp({
-      credential: admin.credential.cert(secretKey as admin.ServiceAccount),
+      credential: admin.credential.cert(secretKey),
       databaseURL: databaseURLSecretKey,
     });
 
