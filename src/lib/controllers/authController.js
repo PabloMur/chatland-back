@@ -1,11 +1,11 @@
-//import AuthModel from "@/lib/models/AuthModel";
+import AuthModel from "@/lib/models/AuthModel";
 //import { headers } from "next/headers";
 //import jwt from "jsonwebtoken";
 
 class AuthController {
   static async createAuth(req) {
     const { email, password } = await req.json();
-    const created = true; //await AuthModel.createAuth(email, password);
+    const created = await AuthModel.createAuth(email, password);
     return created;
   }
 }
